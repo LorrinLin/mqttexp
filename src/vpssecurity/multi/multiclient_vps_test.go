@@ -17,13 +17,13 @@ func BenchmarkVpsMultiClients(b *testing.B){
 	publisher := connect("pub",uri)
 	for i:=0;i<b.N;i++{
 		listen(uri,topic,i)
-		publisher.Publish(topic, 0, false, "hello")
+		publisher.Publish(topic, 2, false, "hello")
 	}
 }
 
 func listen(uri string, topic string, i int){
 	consumer := connect("sub"+strconv.Itoa(i), uri)
-	consumer.Subscribe(topic, 0, func(client mqtt.Client, msg mqtt.Message){
+	consumer.Subscribe(topic, 2, func(client mqtt.Client, msg mqtt.Message){
 //		log.Print("message:", string(msg.Payload()))
 	})
 }

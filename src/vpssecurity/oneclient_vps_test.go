@@ -17,13 +17,13 @@ func BenchmarkVpsOneClient(b *testing.B){
 	publisher := connect("pub",uri)
 	b.ResetTimer()
 	for i:=0;i<b.N;i++{
-		publisher.Publish(topic, 0, false, "hello")
+		publisher.Publish(topic, 2, false, "hello")
 	}
 }
 
 func listen(uri string, topic string){
 	consumer := connect("sub",uri)
-	consumer.Subscribe(topic, 0, func(client mqtt.Client, msg mqtt.Message){
+	consumer.Subscribe(topic, 2, func(client mqtt.Client, msg mqtt.Message){
 //		log.Print("message:", string(msg.Payload()))
 	})
 }
