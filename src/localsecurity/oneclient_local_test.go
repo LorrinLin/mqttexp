@@ -15,9 +15,9 @@ func BenchmarkLocalOneClient(b *testing.B){
 	topic := "testTimeTopic"
 	go listen(uri,topic)
 	publisher := connect("pub",uri)
-	b.ResetTimer()
 	for i:=0;i<b.N;i++{
-		publisher.Publish(topic, 2, false, "hello")
+		token := publisher.Publish(topic, 2, false, "hello")
+		token.Wait()
 	}
 }
 
