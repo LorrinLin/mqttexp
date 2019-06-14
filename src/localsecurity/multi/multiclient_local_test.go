@@ -17,7 +17,8 @@ func BenchmarkLocalMultiClients(b *testing.B){
 	publisher := connect("pub",uri)
 	for i:=0;i<b.N;i++{
 		listen(uri,topic,i)
-		publisher.Publish(topic, 2, false, "hello")
+		token := publisher.Publish(topic, 2, false, "hello")
+		token.Wait()
 	}
 }
 
